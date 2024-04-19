@@ -11,7 +11,7 @@ const adminRoutes = require('./Routes/admin');
 const shopRoutes = require('./Routes/shop');
 
 handle.use(bodyparser.urlencoded({extended:false}));
-handle.use(adminRoutes);
+handle.use('/admin',adminRoutes);
 handle.use(shopRoutes);
 
 handle.use((req,res,next) =>{

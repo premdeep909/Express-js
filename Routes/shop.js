@@ -1,10 +1,12 @@
+    const path = require('path');
 
 const express = require('express');
+
 const router = express.Router();
 
-router.get('/',(req,res,next) =>{
-    console.warn("middleware-3");    
-    res.send('<h1>Hello</h1>')
-    })
+// Path + method
+router.get('/', (req, res, next) => {
+  res.sendFile(path.join(__dirname, '../', 'views', 'Shop.html'));
+});
 
-    module.exports = router
+module.exports = router;

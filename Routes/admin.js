@@ -1,13 +1,16 @@
+const path = require('path');
+
 const express = require('express');
+
 const router = express.Router();
 
+// GET - /add-product
+router.get('/Addproduct', (req, res, next) => {
+  res.sendFile(path.join(__dirname, '../', 'views', 'Addproduct.html'));
+});
 
-router.get('/add-product',(req,res,next) =>{
-    //console.warn("middleware-2");
-    res.send('<h1><form action="/admin/add-product" method="POST"><input type="text" name="title" /><button type="submit">Submit</button></form></h1>')
-    })
-  router.post('/add-product',(req,res,next)=>{
-    console.log(req.body);
-    res.redirect('/');
-  })
+// POST - /add-product
+router.post('/Addproduct', (req, res, next) => {
+  res.redirect('/');
+});
 module.exports = router

@@ -4,6 +4,7 @@ const http = require('http');
 const express = require('express');
 const bodyparser = require('body-parser');
 const handle = express();
+const path = require('path');
 
 
 
@@ -15,7 +16,7 @@ handle.use('/admin',adminRoutes);
 handle.use(shopRoutes);
 
 handle.use((req,res,next) =>{
-    res.status(404).send('<h1>Page not found</h1>');
+    res.status(404).sendFile(path.join(__dirname,'views','Page-Not-Found.html'));
 })
         
 const server = http.createServer(handle); 

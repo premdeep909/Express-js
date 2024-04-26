@@ -1,12 +1,13 @@
 const path = require('path');
-
+const viewPath = require('../utils/Path.js');
 const express = require('express');
 
 const router = express.Router();
 
+
 // GET - /add-product
 router.get('/Addproduct', (req, res, next) => {
-  res.sendFile(path.join(__dirname, '../', 'views', 'Addproduct.html'));
+  res.sendFile(viewPath('Addproduct.html'));
 });
 
 // POST - /add-product

@@ -11,11 +11,11 @@ const viewPath = require('./utils/Path');
 handle.use(bodyparser.urlencoded({extended:false}));
 handle.use(express.static(path.join(__dirname,'public')));
 
-const adminRoutes = require('./Routes/admin');
+const adminData= require('./Routes/admin');
 const shopRoutes = require('./Routes/shop');
 
 
-handle.use('/admin',adminRoutes);
+handle.use('/admin',adminData.routes);
 handle.use(shopRoutes);
 
 handle.use((req,res,next) =>{

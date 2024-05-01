@@ -8,7 +8,7 @@ const products = [];
 
 // GET - /add-product
 router.get('/Addproduct', (req, res, next) => {
-  res.sendFile(viewPath('Addproduct.html'));
+  res.render('Addproduct',{pageTitle: "Addproduct"});
 });
 
 // POST - /add-product

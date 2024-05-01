@@ -21,7 +21,7 @@ handle.use('/admin',adminData.routes);
 handle.use(shopRoutes);
 
 handle.use((req,res,next) =>{
-    res.status(404).sendFile(viewPath('Page-Not-Found.html'));
+    res.status(404).render('404');
 })
         
 const server = http.createServer(handle); 

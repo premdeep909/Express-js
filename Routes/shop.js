@@ -7,7 +7,7 @@ const router = express.Router();
 // Path + method
 router.get('/', (req, res, next) => {
   console.log(adminData.products);
-  res.render('shop',{prod: adminData.products,docTitle: "shop"});
+  res.render('shop',{prod: adminData.products,pageTitle: "shop",path:"/"});
 });
 
 module.exports = router;

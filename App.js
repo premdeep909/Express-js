@@ -4,6 +4,8 @@ const http = require('http');
 const express = require('express');
 const bodyparser = require('body-parser');
 const handle = express();
+handle.set('view engine','pug');
+handle.set('views','views');
 const path = require('path');
 const viewPath = require('./utils/Path');
 

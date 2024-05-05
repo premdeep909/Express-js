@@ -23,14 +23,12 @@
     </header>
 
     <main>
-      <h1>My Products</h1>
-      <p>List of all the products...</p>
-      
-      <!-- <div class="grid">
-        
+      <% if (prod.length > 0) { %>
+      <div class="grid">
+        <% for(let product of prod) { %>
         <article class="card product-item">
           <header class="card-header">
-            <h1 class="product-title">great book </h1>
+            <h1 class="product-title"><%= product.title %></h1>
           </header>
           <div class="card-image">
             <img
@@ -49,10 +47,11 @@
             <button class="btn">Add to Cart</button>
           </div>
         </article>
-        
-      </div> -->
-
+        <% } %>
+      </div>
+      <% } else { %>
+        <h2>Product not found!</h2>
+      <% } %>
     </main>
   </body>
 </html>
-   

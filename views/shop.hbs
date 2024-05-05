@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ pageTitle }}</title>
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/product.css" />
+</head>
+
+<body>
+    <header class="main-header">
+        <nav class="main-header-nav">
+            <ul class="main-header-item-list">
+                <li class="main-header-item">
+                    <a class="active" href="/">Shop</a>
+                </li>
+                <li class="main-header-item">
+                    <a href="/admin/Addproduct">Add Product</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {{#if hasProduct }}
+         <div class="grid">
+            {{#each  prod}}
+            <article class="card product-item">
+                <header class="card-header">
+                    <h1 class="product-title">{{ this.title   }}</h1>
+                </header>
+                <div class="card-image">
+                    <img src="https://cdn.pixabay.com/photo/2015/01/08/18/25/desk-593327_1280.jpg" alt="Laptop">
+                </div>
+                <div class="card-content">
+                    <h2 class="product-price">$19.99</h2>
+                    <p class="product-description">A very interesting book about so many even more interesting things!</p>
+                </div>
+                <div class="card-actions">
+                    <button class="btn">Add to Cart</button>
+                </div>
+            </article>
+            {{/each}}
+        </div>
+        {{else}}
+          <h1>Product not found!</h1>
+        {{/if}}
+    </main>
+</body>
+
+</html>

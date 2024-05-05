@@ -8,8 +8,8 @@ const handle = express();
 handle.engine('hbs',
     expressHbs.engine({
         extname: 'hbs',
-        defaultLayout:'',
-        layoutsDir:'',
+        defaultLayout:'main-layout',
+        layoutsDir:'views/layouts',
    } )
 );
 handle.set('view engine','hbs');

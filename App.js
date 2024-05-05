@@ -3,8 +3,16 @@ const http = require('http');
 
 const express = require('express');
 const bodyparser = require('body-parser');
+const expressHbs = require('express-handlebars');
 const handle = express();
-handle.set('view engine','pug');
+handle.engine('hbs',
+    expressHbs.engine({
+        extname: 'hbs',
+        defaultLayout:'',
+        layoutsDir:'',
+   } )
+);
+handle.set('view engine','hbs');
 handle.set('views','views');
 const path = require('path');
 const viewPath = require('./utils/Path');

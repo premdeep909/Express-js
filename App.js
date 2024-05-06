@@ -23,7 +23,7 @@ handle.use('/admin',adminData.routes);
 handle.use(shopRoutes);
 
 handle.use((req,res,next) =>{
-    res.status(404).render('404',{pageTitle: "Page Not Found"});
+    res.status(404).render('404',{pageTitle: "Page Not Found",path: ''});
 })
         
 const server = http.createServer(handle); 

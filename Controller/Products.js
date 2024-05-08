@@ -21,15 +21,17 @@ exports.getAddProduct =  (req, res, next) => {
   };
 
   exports.getProduct = (req, res, next) => {
-    const products = Product.fetchAll();
-   res.render('shop',{
-     prod: products,
-     pageTitle: "shop",
-     path:"/", 
-     hasProduct: products.length>0,
-     formCSS: true,
-     productCSS: true,
-     activeShop: true,
- 
+    Product.fetchAll((products) =>{
+      res.render('shop',{
+        prod: products,
+        pageTitle: "shop",
+        path:"/", 
+        hasProduct: products.length>0,
+        formCSS: true,
+        productCSS: true,
+        activeShop: true,
+    
+    });
+   
  });
   }

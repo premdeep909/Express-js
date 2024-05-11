@@ -2,7 +2,7 @@ const Product = require('../models/product')
 
 
 exports.getAddProduct =  (req, res, next) => {
-    res.render('Addproduct',
+    res.render('admin/Addproduct',
     {pageTitle: "Addproduct",
     path:"/Addproduct",
     formCSS: true,
@@ -12,6 +12,18 @@ exports.getAddProduct =  (req, res, next) => {
   });
 }
 
+exports.getAdminProducts = (req,res,next) => {
+  Product.fetchAll((products) =>{
+    res.render('admin/products',{
+      prod: products,
+      pageTitle: "All Admin Product List",
+      path:"/products"
+    });
+ 
+  });
+} 
+
+
  exports.postAddProduct = (req, res, next) => {
     // console.log(req.body);
     // products.push({title:req.body.title})
@@ -19,19 +31,3 @@ exports.getAddProduct =  (req, res, next) => {
     product.save();
     res.redirect('/');
   };
-
-  exports.getProduct = (req, res, next) => {
-    Product.fetchAll((products) =>{
-      res.render('shop',{
-        prod: products,
-        pageTitle: "shop",
-        path:"/", 
-        hasProduct: products.length>0,
-        formCSS: true,
-        productCSS: true,
-        activeShop: true,
-    
-    });
-   
- });
-  }

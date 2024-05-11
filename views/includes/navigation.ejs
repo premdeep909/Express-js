@@ -5,10 +5,23 @@
         <a class="<%= path === '/' ? 'active' : '' %>" href='/'>Shop</a>
       </li>
       <li class="main-header-item">
+        <a class="<%= path === '/products' ? 'active' : '' %>" href='/products'>My Products</a>
+      </li>
+      <li class="main-header-item">
+        <a class="<%= path === '/cart' ? 'active' : '' %>" href='/cart'>Cart</a>
+      </li>
+      <li class="main-header-item">
         <a
           class="<%= path === '/Addproduct' ? 'active' : '' %>"
           href="/admin/Addproduct"
           >Add Product</a
+        >
+      </li>
+      <li class="main-header-item">
+        <a
+          class="<%= path === '/admin-product' ? 'active' : '' %>"
+          href="/admin/admin-product"
+          >Admin Product </a
         >
       </li>
     </ul>

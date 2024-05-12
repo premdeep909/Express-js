@@ -1,3 +1,4 @@
+const { patch } = require('../Routes/shop');
 const Product = require('../models/product')
 
   exports.getProduct = (req, res, next) => {
@@ -53,3 +54,11 @@ exports.getMyOrders = (req,res,next) => {
  });
 
 } 
+exports.getProductDetails = (req,res,next) =>{
+  const productId = req.params.productId;
+  console.log("productId:" ,productId);
+  res.render('shop/product-details',{
+    pageTitle: "My Product Details",
+    path : "/product-details",
+  })
+}

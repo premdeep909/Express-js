@@ -14,15 +14,14 @@
           </header>
           <div class="card-image">
             <img
-              src="https://kaboompics.com/cache/2/b/6/d/c/2b6dcd9aa2dc7ed5f1dd879d25aaee3c3a981c10.jpeg"
+              src= "<%= product.imageUrl %>"
               alt="Laptop"
             />
           </div>
           <div class="card-content">
-            <h2 class="product-price">$19.99</h2>
+            <h2 class="product-price">$<%= product.price %></h2>
             <p class="product-description">
-              A very interesting book about so many even more interesting
-              things!
+              <%= product.description %>
             </p>
           </div>
           <div class="card-actions">
@@ -35,4 +34,4 @@
         <h2>Product not found!</h2>
       <% } %>
     </main>
-    <%- include('../includes/end.ejs') %> 
+    <%- include('../includes/end.ejs') %>

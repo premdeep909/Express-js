@@ -57,8 +57,13 @@ exports.getMyOrders = (req,res,next) => {
 exports.getProductDetails = (req,res,next) =>{
   const productId = req.params.productId;
   console.log("productId:" ,productId);
-  res.render('shop/product-details',{
-    pageTitle: "My Product Details",
-    path : "/product-details",
-  })
+  Product.findProductById(productId,(product) =>{
+    console.log('product is', product);
+    res.render('shop/product-details',{
+      pageTitle: "My Product Details",
+      path : "/product-details",
+      product : product,
+    })
+  });
+  
 }

@@ -18,6 +18,7 @@ module.exports = class Product{
       this.imageUrl = _imageUrl;
     }
     save(){
+        this.productId = Math.round(Math.random() * 1000).toString();
         getProductFromFile((products) =>{
             products.push(this);
             fs.writeFile(pathBuilt,JSON.stringify(products),(err) =>{

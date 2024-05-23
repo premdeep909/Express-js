@@ -11,7 +11,8 @@ const getProductFromFile = (cb) =>{
   })
 }
 module.exports = class Product{
-    constructor(_title,_description,_price,_imageUrl){
+    constructor(_productid,_title,_description,_price,_imageUrl){
+      this.productId = _productid;
       this.title = _title;
       this.description = _description;
       this.price = _price;
@@ -26,6 +27,20 @@ module.exports = class Product{
             })
         })
       
+    }
+    saveModifiedFile(){
+      if(this.productId){
+          getProductFromFile((products) =>{
+            const existingProdIndex = products.findIndex(
+              product => product.productId === this.productId
+            );
+            const modifiedProducts = [...products];
+            modifiedProducts[existingProdIndex] = this;
+            fs.writeFile(pathBuilt,JSON.stringify(modifiedProducts),(err) =>{
+              console.log('err',err);
+          })
+          })
+      }
     }
     static fetchAll(cb){
         getProductFromFile(cb);

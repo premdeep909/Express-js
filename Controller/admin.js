@@ -27,7 +27,7 @@ exports.getAdminProducts = (req, res, next) => {
   const description = req.body.description;
   const price = req.body.price;
   const imageUrl = req.body.imageUrl;
-    const product = new Product(title,description,price,imageUrl);
+    const product = new Product(null,title,description,price,imageUrl);
     product.save();
     res.redirect('/');
   };
@@ -45,4 +45,22 @@ exports.getAdminProducts = (req, res, next) => {
         isEdit: isEditMode,
         })
      })
+  }
+  exports.saveModifiedProduct = (req,res,next) =>{
+      const reqbody = req.body;
+      const productId = reqbody.productId;
+      const modifiedTitle = reqbody.title;
+      const modfiedImage = reqbody.imageUrl;
+      const modifiedDescription = reqbody.description;
+      const modifiedPrice = reqbody.price;
+ 
+      const modifiedProduct =  new Product(
+        productId,
+        modifiedTitle,
+        modifiedDescription,
+        modifiedPrice,
+        modfiedImage,
+      );
+      modifiedProduct.saveModifiedFile();
+      res.redirect('/admin/admin-product');
   }

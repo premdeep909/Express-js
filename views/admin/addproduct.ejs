@@ -29,7 +29,10 @@
           value="<%= isEdit && product ? product.imageUrl : '' %>"
         />
       </div>
-      <button type="submit">
+      <% if(isEdit) { %>
+        <input type="hidden" value="<%= product.productId %>" name="productId" />
+         <% } %>
+    <button type="submit">
         <%= isEdit ? 'Save Changes' : 'Add Product' %>
       </button>
     </form>

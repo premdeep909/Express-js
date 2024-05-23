@@ -8,6 +8,7 @@ exports.getAddProduct = (req, res, next) => {
     formCSS: true,
     productCSS: true,
     activeAddProduct: true,
+    isEdit :'',
   });
 };
 exports.getAdminProducts = (req, res, next) => {
@@ -30,3 +31,18 @@ exports.getAdminProducts = (req, res, next) => {
     product.save();
     res.redirect('/');
   };
+
+
+  exports.getEditMyProduct = (req,res,next) =>{
+    const isEditMode = req.query.isEditing;
+    const productId = req.params.productId;
+
+    Product.findProductById(productId,(product) =>{
+      res.render('admin/edit-product',{
+        pageTitle: 'Editing Products',
+        path :'',
+        product : product,
+        isEdit: isEditMode,
+        })
+     })
+  }

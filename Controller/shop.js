@@ -56,7 +56,7 @@ exports.getMyOrders = (req,res,next) => {
 } 
 exports.getProductDetails = (req,res,next) =>{
   const productId = req.params.productId;
-  console.log("productId:" ,productId);
+  
   Product.findProductById(productId,(product) =>{
     console.log('product is', product);
     res.render('shop/product-details',{

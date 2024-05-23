@@ -1,29 +1,39 @@
-
 <%- include('../includes/head.ejs') %>
-    <link rel="stylesheet" href="/css/product.css" />
-  </head>
-  <body>
-    <%- include('../includes/navigation.ejs') %>
-    <main>
-      <form class="product-form" action="/admin/Addproduct" method="POST">
-        <div class="form-control">
-          <label for="title">Title</label>
-          <input type="text" name="title" id="title" />
-        </div>
-        <div class="form-control">
-          <label for="Product Description">Product Description</label>
-          <textarea name="description" id="description" rows="6"></textarea>
-        </div>
-        <div class="form-control">
-          <label for="Product Price">Product Price</label>
-          <input type="number" name="price" id="price" />
-        </div>
-        <div class="form-control">
-          <label for="Product Image Url">Product Image Url</label>
-          <input type="text" name="imageUrl" id="imageUrl" />
-        </div>
+</head>
+<body>
+  <%- include('../includes/navigation.ejs') %>
 
-        <button type="submit">Add Product</button>
-      </form>
-    </main>
-    <%- include('../includes/end.ejs') %>
+  <main>
+    <form class="product-form"
+      action="/admin/<%= isEdit ? 'edit-product' : 'addproduct' %>"
+      method="POST">
+      <div class="form-control">
+        <label for="title">Product Title</label>
+        <input type="text" name="title" id="title"
+          value="<%= isEdit && product ? product.title : '' %>"
+        />
+      </div>
+      <div class="form-control">
+        <label for="Product Description">Product Description</label>
+        <textarea name="description" id="description" rows="6"><%= isEdit && product ? product.description : '' %></textarea>
+      </div>
+      <div class="form-control">
+        <label for="Product Price">Product Price</label>
+        <input type="number" name="price" id="price"
+          value="<%= isEdit && product ? product.price : '' %>"
+        />
+      </div>
+      <div class="form-control">
+        <label for="Product image url">Product Image Url</label>
+        <input type="text" name="imageUrl" id="imageUrl"
+          value="<%= isEdit && product ? product.imageUrl : '' %>"
+        />
+      </div>
+      <button type="submit">
+        <%= isEdit ? 'Save Changes' : 'Add Product' %>
+      </button>
+    </form>
+  </main>
+
+  <%- include('../includes/end.ejs') %>
+</body>

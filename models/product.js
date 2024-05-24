@@ -51,4 +51,13 @@ module.exports = class Product{
         callbackFn(product);
       })
     }
+
+     static remove(id){
+      getProductFromFile((products) =>{
+        const updatedProducts = products.filter((prod) => prod.productId !== id);
+        fs.writeFile(pathBuilt,JSON.stringify(updatedProducts),(err) =>{
+          console.log('err',err);
+      })
+      })
+    }
 }

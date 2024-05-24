@@ -64,3 +64,10 @@ exports.getAdminProducts = (req, res, next) => {
       modifiedProduct.saveModifiedFile();
       res.redirect('/admin/admin-product');
   }
+  exports.removeProduct = (req,res,next) =>{
+    const productId = req.body.productId;
+    
+
+    Product.remove(productId);
+    res.redirect('/admin/admin-product')
+  }

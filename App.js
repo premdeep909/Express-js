@@ -3,6 +3,7 @@ const http = require('http');
 
 const express = require('express');
 const bodyparser = require('body-parser');
+const sequelize = require('./connections/database');
 const errorController = require('./Controller/404error');
 
 const handle = express();
@@ -26,5 +27,8 @@ handle.use(shopRoutes);
 handle.use(errorController.get404);
         
 const server = http.createServer(handle); 
+sequelize.sync().then((result) =>{
+    console.log(result);
+}).catch((err) => {console.log(err)})
 server.listen(3002);
 

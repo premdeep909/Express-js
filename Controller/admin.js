@@ -1,4 +1,4 @@
-const Product = require('../models/product')
+const Product = require('../models/product'); 
 
 
 exports.getAddProduct = (req, res, next) => {
@@ -12,6 +12,7 @@ exports.getAddProduct = (req, res, next) => {
   });
 };
 exports.getAdminProducts = (req, res, next) => {
+ 
   Product.fetchAll((products) => {
     res.render('admin/products', {
       prod: products,
@@ -27,8 +28,12 @@ exports.getAdminProducts = (req, res, next) => {
   const description = req.body.description;
   const price = req.body.price;
   const imageUrl = req.body.imageUrl;
-    const product = new Product(null,title,description,price,imageUrl);
-    product.save();
+   Product.create({
+    title : title,
+    description : description,
+    price : price,
+    imageUrl : imageUrl,
+   }).then((result) => {console.log("record completed")}).catch(err => {console.log("failed:record fail")})
     res.redirect('/');
   };
 
@@ -41,7 +46,7 @@ exports.getAdminProducts = (req, res, next) => {
       res.render('admin/edit-product',{
         pageTitle: 'Editing Products',
         path :'',
-        product : product,
+        product : product,    
         isEdit: isEditMode,
         })
      })

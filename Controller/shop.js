@@ -2,15 +2,15 @@ const { patch } = require('../Routes/shop');
 const Product = require('../models/product')
 
   exports.getProduct = (req, res, next) => {
-    Product.fetchAll((products) =>{
+    Product.findAll({raw:true}).then(result =>{console.log(result);
       res.render('shop/product-list',{
-        prod: products,
+        prod: result,
         pageTitle: "All Shop Product List",
         path:"/product-list", 
        
     });
+    }).catch(err =>{console.log(err)});
    
- });
   }
 
   exports.getShopIndex = (req,res,next) => {

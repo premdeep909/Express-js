@@ -56,14 +56,25 @@ exports.getMyOrders = (req,res,next) => {
 } 
 exports.getProductDetails = (req,res,next) =>{
   const productId = req.params.productId;
-  
-  Product.findProductById(productId,(product) =>{
-    console.log('product is', product);
+
+  Product.findOne({
+    where:{
+      id : productId,
+    },
+    raw : true,
+  }).then(result => {
     res.render('shop/product-details',{
-      pageTitle: "My Product Details",
-      path : "/product-details",
-      product : product,
-    })
-  });
+            pageTitle: "My Product Details",
+             path : "/product-details",
+             product : result,
+             })
+  }).catch(err => {console.log(err)});
   
+  // Product.findByPk(productId,{raw: true}).then((result) =>{console.log('my result is ',result);
+  //   res.render('shop/product-details',{
+  //        pageTitle: "My Product Details",
+  //        path : "/product-details",
+  //         product : result,
+  //        })
+  // }).catch((err) =>{console.log(err)})
 }

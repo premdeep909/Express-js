@@ -28,7 +28,7 @@ handle.use(errorController.get404);
         
 const server = http.createServer(handle); 
 sequelize.sync().then((result) =>{
-    console.log(result);
+    //console.log(result);
 }).catch((err) => {console.log(err)})
 server.listen(3002);
 

@@ -49,7 +49,7 @@ exports.getAdminProducts = (req, res, next) => {
         product : product,    
         isEdit: isEditMode,
         })
-     })
+    })
   }
   exports.saveModifiedProduct = (req,res,next) =>{
       const reqbody = req.body;

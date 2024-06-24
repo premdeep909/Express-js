@@ -14,9 +14,9 @@ const Product = require('../models/product')
   }
 
   exports.getShopIndex = (req,res,next) => {
-    Product.fetchAll((products) =>{
+    Product.findAll({raw:true}).then(result =>{console.log(result);
       res.render('shop/index',{
-        prod: products,
+        prod: result,
         pageTitle: "My Shop",
         path:"/"
       });

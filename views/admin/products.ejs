@@ -30,7 +30,7 @@
             <a class="link-btn" href= "/admin/edit-product/<%= product.id %>?isEditing=true">Edit</a>
             
            <form action="/admin/remove-product" method="POST" >
-                <input type="hidden" value="<%= product.id %>" name="id" />      
+                <input type="hidden" value="<%= product.id %>" name="productId" />      
                     <button class="btn" type="submit" >Remove</button>
           </form>
           </div>

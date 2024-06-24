@@ -34,8 +34,10 @@ exports.getAdminProducts = (req, res, next) => {
     description : description,
     price : price,
     imageUrl : imageUrl,
-   }).then((result) => {console.log("record completed")}).catch(err => {console.log("failed:record fail")})
+   }).then((result) => {console.log("record completed")
     res.redirect('/');
+   }).catch(err => {console.log("failed:record fail")})
+   
   };
 
 
@@ -92,8 +94,12 @@ exports.getAdminProducts = (req, res, next) => {
   
   exports.removeProduct = (req,res,next) =>{
     const productId = req.body.productId;
+    Product.destroy({
+      where : {
+        id : productId,
+      },
+    }).then(result =>{
+      res.redirect('/admin/admin-product')
+    }).catch(err => {console.log(err)});
     
-
-    Product.remove(productId);
-    res.redirect('/admin/admin-product')
   }

@@ -30,7 +30,7 @@
         />
       </div>
       <% if(isEdit) { %>
-        <input type="hidden" value="<%= product.productId %>" name="productId" />
+        <input type="hidden" value="<%= product.id %>" name="productId" />
          <% } %>
     <button type="submit">
         <%= isEdit ? 'Save Changes' : 'Add Product' %>

@@ -12,14 +12,15 @@ exports.getAddProduct = (req, res, next) => {
   });
 };
 exports.getAdminProducts = (req, res, next) => {
- 
-  Product.fetchAll((products) => {
-    res.render('admin/products', {
-      prod: products,
-      pageTitle: 'All Admin Product List',
-      path: '/admin-product',
-    });
-  });
+  Product.findAll()
+      .then(products => {
+          res.render('admin/products', {
+              prod: products,
+              pageTitle: 'All Admin Product List',
+              path: '/admin-product',
+          });
+      })
+      .catch(err => console.log(err));
 };
 
 
@@ -41,34 +42,54 @@ exports.getAdminProducts = (req, res, next) => {
   exports.getEditMyProduct = (req,res,next) =>{
     const isEditMode = req.query.isEditing;
     const productId = req.params.productId;
-
-    Product.findProductById(productId,(product) =>{
-      res.render('admin/edit-product',{
-        pageTitle: 'Editing Products',
-        path :'',
-        product : product,    
-        isEdit: isEditMode,
-        })
+    Product.findOne({
+    where:{
+      id : productId,
+    },
+    raw : true,
+  }).then(result => {
+    res.render('admin/edit-product',{
+          pageTitle: 'Editing Products',
+          path :'',
+          product : result,    
+          isEdit: isEditMode,
+           })
+  }).catch(err => {console.log(err)});
+    // Product.findProductById(productId,(product) =>{
+    //   res.render('admin/edit-product',{
+    //     pageTitle: 'Editing Products',
+    //     path :'',
+    //     product : product,    
+    //     isEdit: isEditMode,
+    //     })
+    // })
+  }
+  exports.saveModifiedProduct = (req, res, next) => {
+    const reqbody = req.body;
+    const productId = reqbody.productId;
+    const modifiedTitle = reqbody.title;
+    const modifiedImage = reqbody.imageUrl;
+    const modifiedDescription = reqbody.description;
+    const modifiedPrice = reqbody.price;
+      
+    Product.update({
+        title: modifiedTitle,
+        imageUrl: modifiedImage,
+        description: modifiedDescription,
+        price: modifiedPrice,
+    }, {
+        where: {
+            id: productId,
+        },
     })
-  }
-  exports.saveModifiedProduct = (req,res,next) =>{
-      const reqbody = req.body;
-      const productId = reqbody.productId;
-      const modifiedTitle = reqbody.title;
-      const modfiedImage = reqbody.imageUrl;
-      const modifiedDescription = reqbody.description;
-      const modifiedPrice = reqbody.price;
- 
-      const modifiedProduct =  new Product(
-        productId,
-        modifiedTitle,
-        modifiedDescription,
-        modifiedPrice,
-        modfiedImage,
-      );
-      modifiedProduct.saveModifiedFile();
-      res.redirect('/admin/admin-product');
-  }
+    .then(result => {
+        res.redirect('/admin/admin-product');
+    })
+    .catch(err => console.log(err));
+};
+
+
+  
   exports.removeProduct = (req,res,next) =>{
     const productId = req.body.productId;
     

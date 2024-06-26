@@ -21,7 +21,7 @@ handle.use(express.static(path.join(__dirname,'public')));
 const adminRoutes= require('./Routes/admin');
 const shopRoutes = require('./Routes/shop');
 const Product = require('./models/product');
-const users = require('./models/users');
+const user = require('./models/user');
 
 handle.use('/admin',adminRoutes);
 handle.use(shopRoutes);
@@ -31,15 +31,28 @@ handle.use(errorController.get404);
 const server = http.createServer(handle); 
 
 // magic association method 
-users.hasMany(Product);
+user.hasMany(Product);
 
-Product.belongsTo(users,{
+Product.belongsTo(user,{
     constraints : true,
     onDelete : 'CASCADE'
 })
 
-sequelize.sync({force : true}).then((result) =>{
-    //console.log(result);
-}).catch((err) => {console.log(err)})
+sequelize.sync().then((result) =>{
+    console.log('sync success');
+    return user.findByPk(12);
+}).then(users => {
+    if(!users){
+        return user.create({
+            name : 'premdee sing',
+            email : 'prem@1231',
+            password : '12333',
+        })
+    }
+     
+}).then(users =>{
+    console.log('user created',users);
+})
+.catch((err) => {console.log(err)})
 server.listen(3002);
 

@@ -21,7 +21,7 @@ handle.use(express.static(path.join(__dirname,'public')));
 console.log('book');
 handle.use((req, res, next) => {
    // console.log("Running middleware");
-    User.findByPk(11).then(user => {
+    User.findByPk(12).then(user => {
             req.user = user;
           // console.log(req.user);
              next();

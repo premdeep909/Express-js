@@ -2,7 +2,8 @@ const { patch } = require('../Routes/shop');
 const Product = require('../models/product')
 
   exports.getProduct = (req, res, next) => {
-    Product.findAll({raw:true}).then(result =>{console.log(result);
+    console.log('user data',req.user);
+    Product.findAll({raw:true}).then(result =>{//console.log(result);
       res.render('shop/product-list',{
         prod: result,
         pageTitle: "All Shop Product List",
@@ -14,7 +15,7 @@ const Product = require('../models/product')
   }
 
   exports.getShopIndex = (req,res,next) => {
-    Product.findAll({raw:true}).then(result =>{console.log(result);
+    Product.findAll({raw:true}).then(result =>{//console.log(result);
       res.render('shop/index',{
         prod: result,
         pageTitle: "My Shop",

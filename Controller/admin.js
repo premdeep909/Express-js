@@ -20,23 +20,28 @@ exports.getAdminProducts = (req, res, next) => {
               path: '/admin-product',
           });
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
 };
 
 
  exports.postAddProduct = (req, res, next) => {
+
+  console.log(req.user);
   const title = req.body.title;
   const description = req.body.description;
   const price = req.body.price;
   const imageUrl = req.body.imageUrl;
-   Product.create({
-    title : title,
-    description : description,
-    price : price,
-    imageUrl : imageUrl,
-   }).then((result) => {console.log("record completed")
+  const user = req.user;
+  user.createProduct({
+    title: title,  
+    description: description,
+    price: price,
+    imageUrl: imageUrl
+  })
+  .then(result => {
+    console.log("Record completed");
     res.redirect('/');
-   }).catch(err => {console.log("failed:record fail")})
+  }).catch(err => {console.log("failed:record fail")})
    
   };
 

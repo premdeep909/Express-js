@@ -33,6 +33,7 @@ const adminRoutes= require('./Routes/admin');
 const shopRoutes = require('./Routes/shop');
 const Product = require('./models/product');
 const User = require('./models/user');
+const Tag = require('./models/tag');
 
 handle.use('/admin',adminRoutes);
 handle.use(shopRoutes);
@@ -54,6 +55,9 @@ Product.belongsTo(User,{
     onDelete : 'CASCADE'
 })
 
+Product.belongsToMany(Tag,{through: 'ProductTags'});
+Tag.belongsToMany(Product,{through : 'ProductTags'});
+
 sequelize.sync().then((result) =>{
     //console.log('sync success');
     return User.findByPk(12);
@@ -68,6 +72,25 @@ sequelize.sync().then((result) =>{
      
 }).then(users =>{
     //console.log('user created',users);
+    return Tag.findAll();
+}).then((tags) =>{
+    if(!tags || !tags.length){
+        const tags = [
+            'programming',
+            'web development',
+            'database',
+            'networking',
+            'algorithm',
+            'computer'
+        ]
+        tags.forEach(tagName =>{
+            Tag.create({name : tagName}).then(res =>{
+                console.log('tag created');
+            }).catch(err =>{
+                console.log('failed to create tag');
+            })
+        }) 
+    }
 })
 .catch((err) => {console.log(err)})
 server.listen(3002);

@@ -2,7 +2,7 @@ const { patch } = require('../Routes/shop');
 const Product = require('../models/product')
 
   exports.getProduct = (req, res, next) => {
-    console.log('user data',req.user);
+   // console.log('user data',req.user);
     Product.findAll({raw:true}).then(result =>{//console.log(result);
       res.render('shop/product-list',{
         prod: result,

@@ -5,7 +5,7 @@
   "main": "handle.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon handle.js"
+    "start": "nodemon App.js"
   },
   "author": "premdeep singh",
   "license": "ISC",
